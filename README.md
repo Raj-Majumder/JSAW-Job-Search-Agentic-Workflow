@@ -1,6 +1,19 @@
-# Raj JSAW — Agentic For Raj Job Search
+# JSAW — Job Search Agentic Workflow and AI Assitant JOB-e
 
-A conversational multi-agent job search assistant. **JOB-e** is the single entry point you talk to; three specialist agents (Search, Talent, Resume) work in the background as tools JOB-e calls based on what you actually ask — there's no fixed pipeline to run top to bottom anymore. One Excel file is the single source of truth throughout.
+A conversational multi-agent job search assistant. **JOB-e** is the single entry point you talk to; three specialist agents (Search, Talent, Resume) work in the background as tools JOB-e calls based on what you actually ask — there's no fixed pipeline to run top to bottom. One Excel file is the single source of truth throughout.
+
+## Features
+
+- **Multi-agent orchestration**: JOB-e coordinates a Search Agent, Talent Agent, and Resume Agent as tools, calling only what a request actually needs instead of running a fixed pipeline.
+- **Excel-native tracking**: One workbook, two sheets (Job Tracker, Applications & Outcomes), updated in place on every run. Hand-built formatting and dropdowns are never overwritten.
+- **Automated Gmail sync**: Pulls new postings and application-status updates via IMAP, using Gmail's server-side search syntax.
+- **Guarded web scraping**: Crawls only a company's own careers page or a third-party ATS listing. LinkedIn and Indeed are hard-blocked in code, not just prompted.
+- **Resume-aware scoring**: Checklist-style match scoring (0 to 100) against resume and proof-point documents in a Context Hub, with strong and weak points captured per posting.
+- **On-demand drafting**: Cover letters and resume-change proposals are generated only when asked for a specific posting, then critiqued by a spawned Company Research Agent before being finalized.
+- **Flexible delivery**: Compile to text, docx, or pdf, save it, email it, or both. Nothing is sent automatically.
+- **Hybrid model routing**: Lighter models handle search and classification; stronger models handle scoring and drafting, balancing cost against quality.
+- **Built-in dashboard**: KPI cards (totals, high match count, average score, applications, response rate) plus a live sheet browser, no charting library required.
+- **Conversational control**: No fixed batch sequence. JOB-e decides what needs to run based on what's asked, and flags gaps in the tracker (missing JD summaries, thin scoring) before answering from incomplete data.
 
 ## Screenshots
 
@@ -38,7 +51,7 @@ All four read/write **one file**: `Job Alerts/Job_Search_-_SOR.xlsx`.
 
 ## Setup
 
-1. Place this folder at `/Users/rajhomedesktop/Desktop/Raj JSAW`.
+1. Place this folder at `/Users/_/Raj JSAW`.
 2. `pip install -r requirements.txt && crawl4ai-setup`
 3. Secrets: `config/CLAUDE_API_KEY.rtf` (Anthropic key, plain text) and `config/G-Mail.env` (copy from `.example`, fill in `CEO_EMAIL` / `EMAIL_APP_PASSWORD`).
 4. Copy `templates/Job_Search-SOR.template.xlsx` to `Job Alerts/Job Search-SOR.xlsx` — `open_job_tracker()` expects this file to already exist and won't create it for you (by design, so your hand-built formatting/dropdowns never get silently overwritten).
